@@ -1,13 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Microsoft.VisualBasic.Devices;
+using NAudio.Wave;
 using NLua;
 using Timer = System.Windows.Forms.Timer;
 
@@ -114,6 +116,7 @@ namespace Aetherial_Engine
             {
                 lua.RegisterFunction("PrintMessage", this, GetType().GetMethod("PrintMessage"));
                 lua.RegisterFunction("KeyCheck", this, GetType().GetMethod("KeyCheck"));
+                lua.RegisterFunction("PlaySound", this, GetType().GetMethod("PlaySound"));
                 lua.RegisterFunction("CollisionCheck", this, GetType().GetMethod("CollisionCheck"));
                 lua.RegisterFunction("CreateObject", this, GetType().GetMethod("CreateObject"));
                 lua.RegisterFunction("DeleteObject", this, GetType().GetMethod("DeleteObject"));
@@ -190,6 +193,12 @@ namespace Aetherial_Engine
             updateTimer = new Timer { Interval = 16 };
             updateTimer.Tick += (sender, e) =>
             {
+                if (!updateTimer.Enabled)
+                {
+                    Console.WriteLine("Timer was stopped, exiting the Tick method.");
+                    return;
+                }
+
                 if (gameObjects == null)
                 {
                     LogMessage("GameObjects list is null during game loop.", "Error");
@@ -352,14 +361,49 @@ namespace Aetherial_Engine
 
             obj.pictureBox.Show();
         }
+
+        public void PlaySound(string filename, bool loop)
+        {
+            if (!File.Exists(filename))
+            {
+                LogMessage($"Sound file not found: {filename}", "Error");
+                return;
+            }
+
+            try
+            {
+                var waveOut = new WaveOutEvent();
+                var audioFile = new AudioFileReader(filename);
+
+                if (loop)
+                {
+                    waveOut.PlaybackStopped += (sender, e) =>
+                    {
+                        audioFile.Position = 0;
+                        waveOut.Play();
+                    };
+                }
+
+                waveOut.Init(audioFile);
+                waveOut.Play();
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error playing sound: {ex.Message}", "Error");
+            }
+        }
+
+
         private void Player_FormClosing(object sender, FormClosingEventArgs e)
         {
-            updateTimer?.Stop();
-
-            e.Cancel = false;
+            if (updateTimer != null && updateTimer.Enabled)
+            {
+                updateTimer.Enabled = false;
+            }
         }
+
     }
-public class GameObjectState
+    public class GameObjectState
     {
         public string Name { get; set; }
         public int X { get; set; }

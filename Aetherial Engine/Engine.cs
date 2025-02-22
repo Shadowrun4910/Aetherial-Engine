@@ -13,8 +13,6 @@ namespace Aetherial_Engine
 
         private GameObject selecteddObject;
 
-        private Player player;
-
         public Engine()
         {
             InitializeComponent();
@@ -510,9 +508,42 @@ namespace Aetherial_Engine
             }
         }
 
-        private void export_btn_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //nothing
+            using (SaveFileDialog saveDialog = new SaveFileDialog
+            {
+                Filter = "JSON Files|*.json",
+                Title = "Aetherial Saver"
+            })
+            {
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    SaveState(saveDialog.FileName);
+                    LogToConsole($"File '{Path.GetFileName(saveDialog.FileName)}' has been saved successfully!");
+                }
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openDialog = new OpenFileDialog
+            {
+                Filter = "JSON Files|*.json",
+                Title = "Aetherial Loader"
+            })
+            {
+                if (openDialog.ShowDialog() == DialogResult.OK)
+                {
+                    LoadState(openDialog.FileName);
+                    console.Clear();
+                    LogToConsole($"File '{openDialog.SafeFileName}' has loaded successfully!");
+                }
+            }
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This game engine was developed to test my skills beyond game developement and how quick i could do it.\n\nGame engine made by Shadowrun4910.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 

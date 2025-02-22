@@ -53,12 +53,14 @@
             this.play_button = new System.Windows.Forms.Button();
             this.createobj_btn = new System.Windows.Forms.Button();
             this.deleteobj_btn = new System.Windows.Forms.Button();
-            this.save_btn = new System.Windows.Forms.Button();
-            this.load_btn = new System.Windows.Forms.Button();
             this.clrconsole_btn = new System.Windows.Forms.Button();
-            this.export_btn = new System.Windows.Forms.Button();
             this.exlogs_btn = new System.Windows.Forms.Button();
+            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.properties_panel.SuspendLayout();
+            this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // properties_panel
@@ -85,10 +87,10 @@
             this.properties_panel.Controls.Add(this.objx_label);
             this.properties_panel.Controls.Add(this.objx_input);
             this.properties_panel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.properties_panel.Location = new System.Drawing.Point(628, -6);
+            this.properties_panel.Location = new System.Drawing.Point(628, 24);
             this.properties_panel.Name = "properties_panel";
-            this.properties_panel.Size = new System.Drawing.Size(217, 582);
-            this.properties_panel.TabIndex = 0;
+            this.properties_panel.Size = new System.Drawing.Size(217, 552);
+            this.properties_panel.TabIndex = 1;
             // 
             // brtb_btn
             // 
@@ -289,9 +291,9 @@
             // 
             // play_button
             // 
-            this.play_button.Location = new System.Drawing.Point(12, 12);
+            this.play_button.Location = new System.Drawing.Point(12, 27);
             this.play_button.Name = "play_button";
-            this.play_button.Size = new System.Drawing.Size(42, 23);
+            this.play_button.Size = new System.Drawing.Size(49, 23);
             this.play_button.TabIndex = 2;
             this.play_button.Text = "Play";
             this.play_button.UseVisualStyleBackColor = true;
@@ -299,7 +301,7 @@
             // 
             // createobj_btn
             // 
-            this.createobj_btn.Location = new System.Drawing.Point(440, 12);
+            this.createobj_btn.Location = new System.Drawing.Point(440, 27);
             this.createobj_btn.Name = "createobj_btn";
             this.createobj_btn.Size = new System.Drawing.Size(88, 23);
             this.createobj_btn.TabIndex = 4;
@@ -309,33 +311,13 @@
             // 
             // deleteobj_btn
             // 
-            this.deleteobj_btn.Location = new System.Drawing.Point(534, 12);
+            this.deleteobj_btn.Location = new System.Drawing.Point(534, 27);
             this.deleteobj_btn.Name = "deleteobj_btn";
             this.deleteobj_btn.Size = new System.Drawing.Size(88, 23);
             this.deleteobj_btn.TabIndex = 5;
             this.deleteobj_btn.Text = "Delete Object";
             this.deleteobj_btn.UseVisualStyleBackColor = true;
             this.deleteobj_btn.Click += new System.EventHandler(this.removeobj_btn_Click);
-            // 
-            // save_btn
-            // 
-            this.save_btn.Location = new System.Drawing.Point(440, 545);
-            this.save_btn.Name = "save_btn";
-            this.save_btn.Size = new System.Drawing.Size(54, 23);
-            this.save_btn.TabIndex = 6;
-            this.save_btn.Text = "Save";
-            this.save_btn.UseVisualStyleBackColor = true;
-            this.save_btn.Click += new System.EventHandler(this.save_btn_Click);
-            // 
-            // load_btn
-            // 
-            this.load_btn.Location = new System.Drawing.Point(500, 545);
-            this.load_btn.Name = "load_btn";
-            this.load_btn.Size = new System.Drawing.Size(54, 23);
-            this.load_btn.TabIndex = 7;
-            this.load_btn.Text = "Load";
-            this.load_btn.UseVisualStyleBackColor = true;
-            this.load_btn.Click += new System.EventHandler(this.load_btn_Click);
             // 
             // clrconsole_btn
             // 
@@ -347,17 +329,6 @@
             this.clrconsole_btn.UseVisualStyleBackColor = true;
             this.clrconsole_btn.Click += new System.EventHandler(this.clrconsole_btn_Click);
             // 
-            // export_btn
-            // 
-            this.export_btn.Enabled = false;
-            this.export_btn.Location = new System.Drawing.Point(560, 545);
-            this.export_btn.Name = "export_btn";
-            this.export_btn.Size = new System.Drawing.Size(54, 23);
-            this.export_btn.TabIndex = 9;
-            this.export_btn.Text = "Export";
-            this.export_btn.UseVisualStyleBackColor = true;
-            this.export_btn.Click += new System.EventHandler(this.export_btn_Click);
-            // 
             // exlogs_btn
             // 
             this.exlogs_btn.Location = new System.Drawing.Point(111, 545);
@@ -368,6 +339,39 @@
             this.exlogs_btn.UseVisualStyleBackColor = true;
             this.exlogs_btn.Click += new System.EventHandler(this.exlogs_btn_Click);
             // 
+            // Menu
+            // 
+            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.Menu.Location = new System.Drawing.Point(0, 0);
+            this.Menu.Name = "Menu";
+            this.Menu.Size = new System.Drawing.Size(840, 24);
+            this.Menu.TabIndex = 0;
+            this.Menu.Text = "menu";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.helpToolStripMenuItem.Text = "About";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
             // Engine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -375,23 +379,25 @@
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(840, 656);
             this.Controls.Add(this.exlogs_btn);
-            this.Controls.Add(this.export_btn);
             this.Controls.Add(this.clrconsole_btn);
-            this.Controls.Add(this.load_btn);
-            this.Controls.Add(this.save_btn);
             this.Controls.Add(this.deleteobj_btn);
             this.Controls.Add(this.createobj_btn);
             this.Controls.Add(this.play_button);
             this.Controls.Add(this.console);
             this.Controls.Add(this.properties_panel);
+            this.Controls.Add(this.Menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.Menu;
             this.MaximizeBox = false;
             this.Name = "Engine";
             this.Text = "Aetherial Engine";
             this.properties_panel.ResumeLayout(false);
             this.properties_panel.PerformLayout();
+            this.Menu.ResumeLayout(false);
+            this.Menu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -416,15 +422,16 @@
         private Button deleteobj_btn;
         private TextBox objname_input;
         private Button removescript_button;
-        private Button save_btn;
-        private Button load_btn;
         private Button setimage_btn;
         private Label objimage_label;
         private TextBox objimage_input;
         private Button clrconsole_btn;
-        private Button export_btn;
         private Button exlogs_btn;
         private Button brtf_btn;
         private Button brtb_btn;
+        private MenuStrip Menu;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem loadToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
     }
 }
